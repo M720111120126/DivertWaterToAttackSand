@@ -121,7 +121,7 @@ if Global.set_ok == 0:
 app = Ursina(title="束水攻沙演示")
 
 v = int(900 / (Global.width * Global.height) / 7 // 1)+1
-v_sand = int(v ** 3/10//1)+1
+v_sand = int(v ** 3/20//1)+1
 Global.elapsed_time = 0.0
 
 class Voxel(Button):
@@ -192,14 +192,14 @@ for z in range(10):
         water(speed=v, start_position=(x+1, Global.height-0.09, 0), end_position=(x+1, Global.height-0.09, 9), now_position=(x+1, Global.height-0.09, z))
 
 for z in range(10):
-    for y in range(Global.height+1):
+    for y in range(Global.height):
         for x in range(Global.width):
-            if y == 0:
-                Voxel2((x+1, y+1.01, z))
+            if y+1 == Global.height:
+                Voxel2((x+1, y+0.98, z))
             else:
-                Voxel2((x+1, y-0.02, z))
-
-Global.sands.append(sand(speed=v_sand, start_position=(1+random.uniform(-0.1, 0.1), Global.height, 0), end_position=(1+random.uniform(-0.1, 0.1), Global.height, 9), now_position=(1+random.uniform(-0.1, 0.1), Global.height, random.uniform(0, 9))))
+                Voxel2((x+1, y+1, z))
+for x in range(Global.width):
+    Global.sands.append(sand(speed=v_sand, start_position=(x+1+random.uniform(-0.1, 0.1), Global.height, 0), end_position=(x+1+random.uniform(-0.1, 0.1), Global.height, 9), now_position=(x+1+random.uniform(-0.1, 0.1), Global.height, random.uniform(0, 9))))
 
 Text.default_resolution = 1080 * Text.size
 info_panel = Text(

@@ -31,7 +31,7 @@ def update_width(*args):
             width_slider.set(value)
         else:
             messagebox.showwarning("输入错误", "河宽必须在1到6之间")
-            width_var.set(Global.width)
+            width_var.set(str(Global.width))
     except ValueError:
         pass
 def update_height(*args):
@@ -41,7 +41,7 @@ def update_height(*args):
             height_slider.set(value)
         else:
             messagebox.showwarning("输入错误", "河高必须在1到6之间")
-            height_var.set(Global.height)
+            height_var.set(str(Global.height))
     except ValueError:
         pass
 def update_sediment(*args):
@@ -51,7 +51,7 @@ def update_sediment(*args):
             sediment_slider.set(value)
         else:
             messagebox.showwarning("输入错误", "泥沙量必须在1到100之间")
-            sediment_var.set(Global.sand_total)
+            sediment_var.set(str(Global.sand_total))
     except ValueError:
         pass
 root = tk.Tk()
@@ -76,7 +76,7 @@ width_var.trace_add("write", update_width)
 width_entry = ttk.Entry(width_frame, textvariable=width_var, validate='key', validatecommand=vcmd, width=5)
 width_entry.grid(row=0, column=1, padx=5, pady=5)
 
-width_slider = ttk.Scale(width_frame, from_=1, to=6, orient='horizontal', variable=width_var, length=200, command=lambda x: width_var.set(int(float(x))))
+width_slider = ttk.Scale(width_frame, from_=1, to=6, orient='horizontal', variable=tk.IntVar(value=int(width_var.get())), length=200, command=lambda x: width_var.set(str(int(float(x)))))
 width_slider.grid(row=0, column=2, padx=5, pady=5)
 
 # 创建河高框架
@@ -91,7 +91,7 @@ height_var.trace_add("write", update_height)
 height_entry = ttk.Entry(height_frame, textvariable=height_var, validate='key', validatecommand=vcmd, width=5)
 height_entry.grid(row=0, column=1, padx=5, pady=5)
 
-height_slider = ttk.Scale(height_frame, from_=1, to=6, orient='horizontal', variable=height_var, length=200, command=lambda x: height_var.set(int(float(x))))
+height_slider = ttk.Scale(height_frame, from_=1, to=6, orient='horizontal', variable=tk.IntVar(value=int(height_var.get())), length=200, command=lambda x: height_var.set(str(int(float(x)))))
 height_slider.grid(row=0, column=2, padx=5, pady=5)
 
 # 创建泥沙量框架
@@ -106,7 +106,7 @@ sediment_var.trace_add("write", update_sediment)
 sediment_entry = ttk.Entry(sediment_frame, textvariable=sediment_var, validate='key', validatecommand=vcmd, width=5)
 sediment_entry.grid(row=0, column=1, padx=5, pady=5)
 
-sediment_slider = ttk.Scale(sediment_frame, from_=1, to=100, orient='horizontal', variable=sediment_var, length=200, command=lambda x: sediment_var.set(int(float(x))))
+sediment_slider = ttk.Scale(sediment_frame, from_=1, to=100, orient='horizontal', variable=tk.IntVar(value=int(sediment_var.get())), length=200, command=lambda x: sediment_var.set(str(int(float(x)))))
 sediment_slider.grid(row=0, column=2, padx=5, pady=5)
 
 result_label = ttk.Label(root, text="由于引擎限制，参数将以英文显示")
